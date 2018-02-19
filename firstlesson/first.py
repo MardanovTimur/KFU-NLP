@@ -54,6 +54,6 @@ if __name__ == '__main__':
     print '------------------------------\n--------------\n'
     print IDF
     TF_IDF = map(lambda x,y: map(lambda x1, y1:(x1[0],x1[1]*y1[1]) ,x,y) ,TF,IDF)
-    print '----------------------------\n-------------------\n'
+    print '----------------------------\n------------------- TF-IDF______________\n'
     print sorted(TF_IDF[0], key=lambda x : x[1], reverse=True)
 
