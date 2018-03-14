@@ -1,5 +1,8 @@
 EMPTY = "_"
 RESH = "#"
+from asciitree import LeftAligned
+
+PATHS = []
 
 class Value:
     val = None
@@ -69,6 +72,12 @@ def get_path(massive, l1, l2, s=[]):
     return s
 
 
+def construct_all_paths(path_item, tree, a):
+    for path in path_item._back:
+        tree.update({path: {}})
+        construct_all_paths(a[path[0]][path[1]], tree.get(path), a)
+    return tree
+
 def algorithm(string1, string2):
     string1 = EMPTY + RESH + string1
     string2 = EMPTY + RESH + string2
@@ -77,11 +86,15 @@ def algorithm(string1, string2):
         for j in range(2,len(string2)):
             a[i][j] = calculate_path(i,j, a[i][j], a)
     path = get_path(a, len(string1)-1, len(string2)-1,)
-    return path
+    path_tree = construct_all_paths(a[len(string1) - 1][len(string2)- 1], {}, a)
+    return path, path_tree
 
 if __name__ == '__main__':
     str1, str2 = (raw_input(), raw_input())
-    path = algorithm(str1, str2)
+    path, path_tree = algorithm(str1, str2)
 
-    print 'Path - '
+    print '\nPath - '
     print path
+    tr = LeftAligned()
+    print tr(path_tree)
+
