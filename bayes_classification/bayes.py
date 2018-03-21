@@ -49,18 +49,20 @@ if __name__ == '__main__':
 
         precision += TP/float(TP_FP)
         recall += TP/float(TP_FN)
-        fmera += 2*precision*recall/(precision + recall)
+        fmera += 2*TP/float(TP_FP)*TP/float(TP_FN)/(TP/float(TP_FP) + TP/float(TP_FN))
 
-    #  classifyer.fit(dataset[:TRAIN].data, dataset[:TRAIN].positive)
-    #  predicted_data = classifyer.predict(dataset[:-TEST].positive)
-    #  TP = sum(map(lambda x, y: 1 if x==y and x else 0, predicted_data, dataset.target[-TEST:]))
-    #  TP_FP = sum(predicted_data)
-    #  TP_FN = sum(dataset.target[-TEST:])
-
-    #  precision =TP/float(TP_FP)
-    #  recall = TP/float(TP_FN)
 
     print '\bPrecision data: {}'.format(precision/K_cross)
     print '\nRecall data: {}'.format(recall/K_cross)
-    print '\nF-mera: {}'.format(fmera/K_cross)
+    print '\nF1: {}'.format(fmera/K_cross)
 
+
+# Old realisations
+#  classifyer.fit(dataset[:TRAIN].data, dataset[:TRAIN].positive)
+#  predicted_data = classifyer.predict(dataset[:-TEST].positive)
+#  TP = sum(map(lambda x, y: 1 if x==y and x else 0, predicted_data, dataset.target[-TEST:]))
+#  TP_FP = sum(predicted_data)
+#  TP_FN = sum(dataset.target[-TEST:])
+
+#  precision =TP/float(TP_FP)
+#  recall = TP/float(TP_FN)
